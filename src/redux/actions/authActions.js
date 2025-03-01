@@ -1,6 +1,6 @@
 import { auth } from "@/firebase/firebaseConfig";
 import axios from "axios";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 
 
@@ -32,6 +32,14 @@ export const loginUser = (userCreds) => async (dispatch) => {
         const res = await signInWithEmailAndPassword(auth, userCreds.email, userCreds.password)
         dispatch({type: LOGIN_USER, payload: res.user})
         alert('User logged in!')
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const logoutUser = () => async (dispatch) => {
+    try {
+        dispatch({type: LOGOUT_USER})
     } catch (error) {
         console.log(error)
     }
