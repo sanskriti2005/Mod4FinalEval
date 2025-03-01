@@ -1,4 +1,4 @@
-import { fetchBooks } from '@/redux/actions/booksActions';
+import { addBooksToUsersList, fetchBooks } from '@/redux/actions/booksActions';
 import { Grid, Heading, Image, Text, VStack, Button } from '@chakra-ui/react';
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,11 +13,11 @@ const Home = () => {
     dispatch(fetchBooks())
   }, [])
   
-  const handleRead = () => {
+  const handleRead = (bookObj) => {
     if(!user){
       alert('Please login or register to read')
     } else{
-      navigate('/mybooks')
+      dispatch(addBooksToUsersList(bookObj, user.uid))
     }
   }
   return (
@@ -28,11 +28,11 @@ const Home = () => {
         books.length > 0 ? 
         books.map((book) => {
           return(
-            <VStack padding={4} border={"1px solid white"} borderRadius={"8px"}>
+            <VStack padding={4} border={"1px solid white"} borderRadius={"8px"} key={book.id}>
               <Image src={book.coverImage}/>
               <Heading>{book.title}</Heading>
               <Text>{book.author}</Text>
-              <Button onClick={handleRead}>Want to read</Button>
+              <Button onClick={() => handleRead(book)}>Want to read</Button>
             </VStack>
           )
         })
