@@ -14,6 +14,7 @@ const Register = () => {
     setFormData(
       {...formData, [name]: value}
     )
+    setFormData(initFormData)
   }
 
   const handleRegistration = () => {

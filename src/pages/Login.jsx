@@ -14,6 +14,7 @@ const Login = () => {
     setFormData(
       {...formData, [name]: value}
     )
+    setFormData(initFormData)
   }
 
   const handleLogin = () => {
