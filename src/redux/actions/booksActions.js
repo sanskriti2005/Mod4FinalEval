@@ -5,6 +5,9 @@ export const FETCH_BOOKS_SUCCESS = "FETCH_BOOKS_SUCCESS";
 export const FETCH_BOOKS_FAILURE = "FETCH_BOOKS_FAILURE";
 export const ADD_BOOK_TO_USER_LIST = "ADD_BOOK_TO_USER_LIST";
 export const FETCH_MY_BOOKS = "FETCH_MY_BOOKS";
+export const UPDATE_BOOK_STATUS = "UPDATE_BOOK_STATUS";
+export const UPDATE_BOOK_RATING = "UPDATE_BOOK_RATING"
+
 
 export const fetchBooks = () => async (dispatch) => {
   try {
@@ -50,8 +53,6 @@ export const fetchMyBooks = (userId) => async (dispatch) => {
       `https://mod4finaleval-default-rtdb.firebaseio.com//users/${userId}/myBooks.json`
     );
     const data = await res.data;
-    console.log(res, "res", data, "data");
-    console.log(userId)
     const arr = Object.entries(data).map(([key, value]) => {
       return { id: key, ...value };
     });
@@ -60,3 +61,16 @@ export const fetchMyBooks = (userId) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const updateBookStatus = (bookId, userId, status='Read') => async (dispatch) => {
+  try {
+    // const res = axios.patch(`https://mod4finaleval-default-rtdb.firebaseio.com//users/${userId}/myBooks/${bookId}`, { status })
+    dispatch({type:UPDATE_BOOK_STATUS, payload: {bookId, status}})
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const updateBookRating = () => async(dispatch) => {
+  
+}
