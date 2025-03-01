@@ -1,5 +1,5 @@
-import { registerUser } from '@/redux/actions/authActions';
-import { Button, Input, VStack } from '@chakra-ui/react'
+import { loginUser, registerUser } from '@/redux/actions/authActions';
+import { Button, Heading, Input, VStack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 
@@ -21,9 +21,10 @@ const Register = () => {
   }
 
   return (
-    <VStack>
-      <Input type='email' value={formData.email} name="email" onChange={(e) => handleInput(e)}/>
-      <Input type='password' value={formData.password} name="password" onChange={(e) => handleInput(e)}/>
+    <VStack width={600} margin={'auto'}>
+      <Heading>Register</Heading>
+      <Input type='email' value={formData.email} name="email" onChange={(e) => handleInput(e)} placeholder='Email'/>
+      <Input type='password' value={formData.password} name="password" onChange={(e) => handleInput(e)} placeholder='Password'/>
       <Button onClick={handleRegistration}>Register</Button>
     </VStack>
   )
