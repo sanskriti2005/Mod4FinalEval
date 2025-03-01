@@ -13,7 +13,6 @@ export const SET_USER = "SET_USER"
 export const registerUser = (userCreds) => async (dispatch) => {
     try {
         const res = await createUserWithEmailAndPassword(auth, userCreds.email, userCreds.password)
-        const otherRes = await axios.post('https://mod4finaleval-default-rtdb.firebaseio.com/users.json', {userEmail: userCreds.email, books: []});
         dispatch({type: REGISTER_USER, payload: res.user})
         alert('User registered!')
     } catch (error) {
